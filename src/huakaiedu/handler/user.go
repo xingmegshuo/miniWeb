@@ -9,6 +9,7 @@
 package handler
 
 import (
+	"encoding/json"
 	"errors"
 	"huakai/models"
 	"huakai/pagination"
@@ -22,6 +23,11 @@ import (
 )
 
 var DB = models.Db
+
+type firstParse struct {
+	Openid       string
+	Access_token string
+}
 
 /**
 	* @api {Post} /wx/user/login 用户登录
@@ -59,7 +65,10 @@ func Login(c *gin.Context) {
 	db := DB
 	code := c.PostForm("code")
 	firstData := WxGet(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx68223a3992542e20&secret=b00e68a156dd5971870cdcf196a23801&code=` + code + `&grant_type=authorization_code`)
-	log.Println(firstData)
+	var first firstParse
+	json.Unmarshal(firstData, &first)
+	userData := wxGet(`https://api.weixin.qq.com/sns/userinfo?access_token=` + first.Access_token + `&openid=` + first.Openid + `&lang=zh_CN`)
+	log.Println(userData)
 	user := models.User{
 		NickName: c.PostForm("nickname"),
 		OpenId:   c.PostForm("openId"),
@@ -298,12 +307,12 @@ func ChangeUser(c *gin.Context) {
 
 // 发送请求
 
-func WxGet(url string) string {
+func WxGet(url string) []byte {
 	resp, err := http.Get(url)
 	if err != nil {
 		return "false"
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	return string(body)
+	return body
 }
