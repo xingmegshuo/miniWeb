@@ -32,7 +32,7 @@ type firstParse struct {
 type userParse struct {
 	Openid     string
 	NickName   string
-	Sex        string
+	Sex        int
 	Headimgurl string
 	City       string
 }
@@ -78,9 +78,8 @@ func Login(c *gin.Context) {
 	json.Unmarshal(firstData, &first)
 	userData := WxGet(`https://api.weixin.qq.com/sns/userinfo?access_token=` + first.Access_token + `&openid=` + first.Openid + `&lang=zh_CN`)
 	json.Unmarshal(userData, &u)
-	log.Println(string(userData))
 	sex := "男"
-	if u.Sex != "1" {
+	if u.Sex != 1 {
 		sex = "女"
 	}
 	user := models.User{
