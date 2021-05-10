@@ -68,7 +68,7 @@ func Login(c *gin.Context) {
 	var first firstParse
 	json.Unmarshal(firstData, &first)
 	userData := WxGet(`https://api.weixin.qq.com/sns/userinfo?access_token=` + first.Access_token + `&openid=` + first.Openid + `&lang=zh_CN`)
-	log.Println(userData)
+	log.Println(string(userData))
 	user := models.User{
 		NickName: c.PostForm("nickname"),
 		OpenId:   c.PostForm("openId"),
