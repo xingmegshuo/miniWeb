@@ -12,7 +12,9 @@ import (
 	"errors"
 	"huakai/models"
 	"huakai/pagination"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -29,7 +31,7 @@ var DB = models.Db
 	* @apiParam {String} nickname 微信昵称
 	* @apiParam {String} openId 微信标识
 	* @apiParam {String} gender 性别
-	* @apiParam {String} avatar 头像地址
+	* @apiParam {String} avatar 头像地址ec
 	* @apiParam {String} city 城市
 	* @apiParamExample {json} Request-Example
 	* {
@@ -55,6 +57,9 @@ var DB = models.Db
 
 func Login(c *gin.Context) {
 	db := DB
+	code := c.PostForm("code")
+	firstData := WxGet(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx68223a3992542e20&secret=b00e68a156dd5971870cdcf196a23801&code=` + code + `&grant_type=authorization_code`)
+	log.Println(firstData)
 	user := models.User{
 		NickName: c.PostForm("nickname"),
 		OpenId:   c.PostForm("openId"),
@@ -289,4 +294,16 @@ func ChangeUser(c *gin.Context) {
 			"message": "更新成功",
 		})
 	}
+}
+
+// 发送请求
+
+func WxGet(url string) string {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "false"
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	return string(body)
 }
