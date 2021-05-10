@@ -310,7 +310,7 @@ func ChangeUser(c *gin.Context) {
 func WxGet(url string) []byte {
 	resp, err := http.Get(url)
 	if err != nil {
-		return "false"
+		return []byte("false")
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
