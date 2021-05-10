@@ -29,6 +29,14 @@ type firstParse struct {
 	Access_token string
 }
 
+type userParse struct {
+	Openid     string
+	NickName   string
+	Sex        string
+	Headimgurl string
+	City       string
+}
+
 /**
 	* @api {Post} /wx/user/login 用户登录
 	* @apiVersion 0.1.0
@@ -66,16 +74,22 @@ func Login(c *gin.Context) {
 	code := c.PostForm("code")
 	firstData := WxGet(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx68223a3992542e20&secret=b00e68a156dd5971870cdcf196a23801&code=` + code + `&grant_type=authorization_code`)
 	var first firstParse
+	var u userParse
 	json.Unmarshal(firstData, &first)
 	userData := WxGet(`https://api.weixin.qq.com/sns/userinfo?access_token=` + first.Access_token + `&openid=` + first.Openid + `&lang=zh_CN`)
+	json.Unmarshal(userData, &u)
 	log.Println(string(userData))
+	sex := "男"
+	if u.Sex != "1" {
+		sex = "女"
+	}
 	user := models.User{
-		NickName: c.PostForm("nickname"),
-		OpenId:   c.PostForm("openId"),
-		Gender:   c.PostForm("gender"),
-		Avatar:   c.PostForm("avatar"),
-		City:     c.PostForm("city"),
-		Iden:     c.PostForm("iden"),
+		NickName: u.NickName,
+		OpenId:   u.Openid,
+		Gender:   sex,
+		Avatar:   u.Headimgurl,
+		City:     u.City,
+		Iden:     "普通用户",
 	}
 	res := models.User{}
 	result := db.Where(&user).First(&res)
@@ -93,7 +107,6 @@ func Login(c *gin.Context) {
 			"data":    res,
 		})
 	}
-
 }
 
 /**
