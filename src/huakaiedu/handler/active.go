@@ -175,6 +175,7 @@ func UpdateActive(c *gin.Context) {
 				Image:   filename,
 				Address: c.PostForm("address"),
 				Contact: c.PostForm("contact"),
+				Time:    c.PostForm("time"),
 			}
 		} else {
 			newActive = models.Active{
@@ -182,6 +183,7 @@ func UpdateActive(c *gin.Context) {
 				Content: c.PostForm("content"),
 				Address: c.PostForm("address"),
 				Contact: c.PostForm("contact"),
+				Time:    c.PostForm("time"),
 			}
 		}
 
