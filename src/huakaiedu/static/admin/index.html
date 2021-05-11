@@ -554,6 +554,7 @@
             value = ""
             alldata = getData("/api/sign?page="+page)
             data = alldata.data
+            console.log(data)
             for(var i=0;i<data.length;i++){
                 value = value +" <tr class=\"gradeX\" >" +
                     "<td>"+data[i].ID+"</td>"+
