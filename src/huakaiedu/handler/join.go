@@ -55,6 +55,7 @@ func GetJoinMes(c *gin.Context) {
 	)
 	db.Model(&models.JoinUs{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	db.Model(&models.JoinUs{}).Scopes(pagination.PaginationScope(query)).Find(&tables)
+	log.println(tables)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   tables,
