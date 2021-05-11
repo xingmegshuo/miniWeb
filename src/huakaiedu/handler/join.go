@@ -13,7 +13,6 @@ import (
 	"gorm.io/gorm"
 	"huakai/models"
 	"huakai/pagination"
-	"log"
 	"strconv"
 )
 
@@ -50,13 +49,13 @@ func GetJoinMes(c *gin.Context) {
 	db := DB
 	paginationQuery, _ := c.Get("PaginationQuery")
 	query := paginationQuery.(*pagination.PaginationQuery)
+	//log.Println(query)
 	var (
 		tables []models.JoinUs
 		count  int64
 	)
 	db.Model(&models.JoinUs{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	db.Model(&models.JoinUs{}).Scopes(pagination.PaginationScope(query)).Find(&tables)
-	log.Println(tables)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   tables,
