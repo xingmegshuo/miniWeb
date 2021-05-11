@@ -56,7 +56,7 @@ func GetSign(c *gin.Context) {
 		count int64
 	)
 	db.Model(&models.Sign{}).Scopes(pagination.PaginationScope(query)).Count(&count)
-	db.Model(&models.Sign{}).Scopes(pagination.PaginationScope(query)).Find(&signs)
+	db.Preload("User").Scopes(pagination.PaginationScope(query)).Find(&signs)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   signs,

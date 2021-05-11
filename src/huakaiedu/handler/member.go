@@ -103,7 +103,7 @@ func GetMemberRes(c *gin.Context) {
 	)
 	db.Model(&models.MemberRes{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	// SELECT * FROM `users`  WHERE ((`age` = "5") or (`email` like "%user-1%")) ORDER BY id desc LIMIT 3 OFFSET 0
-	db.Model(&models.MemberRes{}).Scopes(pagination.PaginationScope(query)).Find(&memberRes)
+	db.Preload("Member").Scopes(pagination.PaginationScope(query)).Find(&memberRes)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   memberRes,
