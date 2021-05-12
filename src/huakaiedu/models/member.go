@@ -10,7 +10,7 @@ package models
 
 import "gorm.io/gorm"
 
-// 会员成果
+// 会员&成果
 
 type MemberRes struct {
 	gorm.Model
@@ -19,6 +19,7 @@ type MemberRes struct {
 	ImgUrl   string `bson:"imgUrl"`
 	Member   Member `gorm:"ForeignKey:MemberID"`
 	MemberID int
+	Type     string
 }
 
 // 会员成员

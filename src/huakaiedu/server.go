@@ -191,6 +191,12 @@ func main() {
 	api.GET("/imgList", paginationHandler, handler.GetImg)
 	api.POST("/createImg", handler.CreateImage)
 	api.POST("/changeImg", handler.ChangeImage)
+	api.GET("/power", paginationHandler, handler.GetPowers)
+	api.POST("/power", handler.CreatePower)
+	api.POST("/change_power", handler.UpdatePower)
+	api.GET("/powerMes", paginationHandler, handler.GetPowerMes)
+	api.POST("/powerMes", handler.CreatePowerMes)
+
 	v1 := api.Group("/wx")
 	{
 		v1.POST("/user/login", handler.Login)

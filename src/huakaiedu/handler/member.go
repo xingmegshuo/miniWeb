@@ -55,7 +55,7 @@ func GetMembers(c *gin.Context) {
 	)
 	db.Model(&models.Member{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	// SELECT * FROM `users`  WHERE ((`age` = "5") or (`email` like "%user-1%")) ORDER BY id desc LIMIT 3 OFFSET 0
-	db.Model(&models.Member{}).Scopes(pagination.PaginationScope(query)).Find(&members)
+	db.Preload("User").Scopes(pagination.PaginationScope(query)).Find(&members)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   members,
@@ -103,7 +103,7 @@ func GetMemberRes(c *gin.Context) {
 	)
 	db.Model(&models.MemberRes{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	// SELECT * FROM `users`  WHERE ((`age` = "5") or (`email` like "%user-1%")) ORDER BY id desc LIMIT 3 OFFSET 0
-	db.Preload("Member").Scopes(pagination.PaginationScope(query)).Find(&memberRes)
+	db.Preload("Member.User").Scopes(pagination.PaginationScope(query)).Find(&memberRes)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   memberRes,
@@ -153,6 +153,7 @@ func CreateMemberRes(c *gin.Context) {
 			Content:  c.PostForm("content"),
 			ImgUrl:   filename,
 			MemberID: id,
+			Type:     c.PostForm("type"),
 		}
 		db.Create(&member)
 		c.JSON(200, gin.H{
@@ -217,12 +218,14 @@ func ChangeMemberRes(c *gin.Context) {
 				Content:  c.PostForm("content"),
 				ImgUrl:   filename,
 				MemberID: memberID,
+				Type:     c.PostForm("type"),
 			}
 		} else {
 			newMember = models.MemberRes{
 				MemberID: memberID,
 				Title:    c.PostForm("title"),
 				Content:  c.PostForm("content"),
+				Type:     c.PostForm("type"),
 			}
 		}
 
