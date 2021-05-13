@@ -105,7 +105,7 @@ func CreatePowerMes(c *gin.Context) {
 	power := models.Power{}
 	db.Where("id=?", powerId).Find(&power)
 	db.Model(&power).Update("CommentCount", power.CommentCount+1)
-	res := models.Active{}
+	res := models.PowerComment{}
 	result := db.Where(&active).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		db.Create(&active)
