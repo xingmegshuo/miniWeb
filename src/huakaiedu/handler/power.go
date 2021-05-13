@@ -93,7 +93,6 @@ func CreatePower(c *gin.Context) {
 
 func CreatePowerMes(c *gin.Context) {
 	db := DB
-	filename := Upload(c)
 	userId, _ := strconv.Atoi(c.Query("user"))
 	powerId, _ := strconv.Atoi(c.Query("power"))
 	uId, _ := strconv.Atoi(c.Query("u_id"))
@@ -108,7 +107,7 @@ func CreatePowerMes(c *gin.Context) {
 	db.Model(&power).Update("CommentCount", power.CommentCount+1)
 	res := models.Active{}
 	result := db.Where(&active).First(&res)
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) && len(filename) > 0 {
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		db.Create(&active)
 		c.JSON(200, gin.H{
 			"status":  "success",
