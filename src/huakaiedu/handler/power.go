@@ -50,7 +50,7 @@ func GetPowerMes(c *gin.Context) {
 		count  int64
 	)
 	db.Model(&models.PowerComment{}).Scopes(pagination.PaginationScope(query)).Count(&count)
-	db.Preload("User").Scopes(pagination.PaginationScope(query)).Find(&tables)
+	db.Preload("User").Preload("RecvUser").Scopes(pagination.PaginationScope(query)).Find(&tables)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   tables,
@@ -96,11 +96,16 @@ func CreatePowerMes(c *gin.Context) {
 	filename := Upload(c)
 	userId, _ := strconv.Atoi(c.Query("user"))
 	powerId, _ := strconv.Atoi(c.Query("power"))
+	uId, _ := strconv.Atoi(c.Query("u_id"))
 	active := models.PowerComment{
 		Message: c.Query("message"),
 		UserID:  userId,
 		PowerID: powerId,
+		UID:     uId,
 	}
+	power := models.Power{}
+	db.Where("id=?", powerId).Find(&power)
+	db.Model(&power).Update("CommentCount", power.CommentCount+1)
 	res := models.Active{}
 	result := db.Where(&active).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) && len(filename) > 0 {

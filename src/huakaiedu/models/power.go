@@ -14,21 +14,24 @@ import "gorm.io/gorm"
 
 type Power struct {
 	gorm.Model
-	Type        string
-	User        User `gorm:"ForeignKey:UserID"`
-	UserID      int
-	Name        string
-	ImgUrl      string `bson:"imgUrl"`
-	Description string
+	Type         string
+	User         User `gorm:"ForeignKey:UserID"`
+	UserID       int
+	Name         string
+	ImgUrl       string `bson:"imgUrl"`
+	Description  string
+	CommentCount int
 }
 
 // 赋能中的留言评论消息处理
 
 type PowerComment struct {
 	gorm.Model
-	Message string
-	Power   Power `gorm:"ForeignKey:PowerID"`
-	PowerID int
-	User    User `gorm:"ForeignKey:UserID"`
-	UserID  int
+	Message  string
+	Power    Power `gorm:"ForeignKey:PowerID"`
+	PowerID  int
+	User     User `gorm:"ForeignKey:UserID"`
+	UserID   int
+	RecvUser User `gorm:"ForeignKey:UID"`
+	UID      int
 }

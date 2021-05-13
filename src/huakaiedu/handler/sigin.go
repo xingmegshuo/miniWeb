@@ -102,6 +102,7 @@ func CreateSign(c *gin.Context) {
 		UserID:   id,
 		Status:   "申请",
 	}
+
 	res := models.Sign{}
 	result := db.Where(&sign).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
@@ -159,6 +160,24 @@ func ChangeSign(c *gin.Context) {
 	} else {
 		newSign := models.Sign{
 			Status: c.Query("status"),
+		}
+		if newSign.Status == "同意申请" {
+			active := models.Active{}
+			db.Where("id=?", res.ActiveID).Find(&active)
+			if active.NowPeople+1 > active.NeedPeople {
+				db.Model(&active).Update("Status", "停止报名")
+				c.JSON(200, gin.H{
+					"status":  "error",
+					"message": "报名人数已经太多了",
+				})
+			} else {
+				db.Model(&active).Update("NowPeople", active.NowPeople+1)
+			}
+		}
+		if newSign.Status == "取消申请" {
+			active := models.Active{}
+			db.Where("id=?", res.ActiveID).Find(&active)
+			db.Model(&active).Update("NowPeople", active.NowPeople-1)
 		}
 		db.Model(&res).Updates(&newSign)
 		c.JSON(200, gin.H{

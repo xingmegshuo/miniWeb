@@ -524,7 +524,10 @@
                 "<th>活动地址</th>"+
                 "<th>联系方式</th>"+
                 "<th>活动时间</th>"+
-
+                "<th>活动预期人数</th>"+
+                "<th>活动报名人数</th>"+
+                "<th>活动状态</th>"+
+                "<th>是否展示</th>"+
                 "<th>操作</th>"
             value = ""
             alldata = getData("/api/active?page="+page)
@@ -542,6 +545,11 @@
                     "<td>"+data[i].Address+"</td>"+
                     "<td>"+data[i].Contact+"</td>"+
                     "<td>"+data[i].Time+"</td>"+
+                    "<td>"+data[i].NeedPeople+"</td>"+
+                    "<td>"+data[i].NowPeople+"</td>"+
+                    "<td>"+data[i].Status+"</td>"+
+                    "<td>"+data[i].IsShow+"</td>"+
+
                     " <td class=\"am-text-middle\">\n" +
                     "     <div class=\"tpl-table-black-operation\">\n" +
                     "         <a href=\"javascript:;\"onclick='showTable("+data[i].ID+",\"active\")'>\n" +
@@ -686,6 +694,7 @@
                 "<th>图片</th>"+
                 "<th>名称</th>"+
                 "<th>介绍</th>"+
+                "<th>评论人数</th>"+
                 "<th>操作</th>"
             value = ""
             alldata = getData("/api/power?page="+page)
@@ -702,6 +711,7 @@
                     "</td>\n" +
                     "<td>"+data[i].Name+"</td>"+
                     "<td>"+data[i].Description.slice(0,5)+"...</td>"+
+                    "<td>"+data[i].CommentCount+"</td>"+
                     " <td class=\"am-text-middle\">\n" +
                     "     <div class=\"tpl-table-black-operation\">\n" +
                     "         <a href=\"javascript:;\"onclick='showTable("+data[i].ID+",\"power\")'>\n" +
@@ -864,7 +874,22 @@
                     "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-time\" placeholder=\"请输入活动时间\">\n" +
                     "                                        <small>活动时间。</small>\n" +
                     "                                    </div>\n" +
+                    "                                </div>\n"+
+                    "                              <div class=\"am-form-group\">\n" +
+                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">活动人数 <span class=\"tpl-form-line-small-title\">ActiveContact</span></label>\n" +
+                    "                                    <div class=\"am-u-sm-9\">\n" +
+                    "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-people\" placeholder=\"请输入活动人数限制\">\n" +
+                    "                                        <small>活动人数。</small>\n" +
+                    "                                    </div>\n" +
+                    "                                </div>\n"+
+                    "                              <div class=\"am-form-group\">\n" +
+                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">活动是否展示 <span class=\"tpl-form-line-small-title\">ActiveContact</span></label>\n" +
+                    "                                    <div class=\"am-u-sm-9\">\n" +
+                    "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-is_show\" placeholder=\"请输入活动是否展示\">\n" +
+                    "                                        <small>活动是否展示true/false。</small>\n" +
+                    "                                    </div>\n" +
                     "                                </div>\n"
+
                 end = "                                <div class=\"am-form-group\">\n" +
                     "                                    <div class=\"am-u-sm-9 am-u-sm-push-3\" onClick='createActive()'>\n" +
                     "                                        <button type=\"button\" class=\"am-btn am-btn-primary tpl-btn-bg-color-success \">提交</button>\n" +
@@ -1126,7 +1151,22 @@
                     "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-time\" placeholder=\""+data.Time+"\">\n" +
                     "                                        <small>活动时间。</small>\n" +
                     "                                    </div>\n" +
+                    "                                </div>\n"+
+                    "                              <div class=\"am-form-group\">\n" +
+                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">活动限制人数 <span class=\"tpl-form-line-small-title\">ActiveContact</span></label>\n" +
+                    "                                    <div class=\"am-u-sm-9\">\n" +
+                    "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-people\" placeholder=\""+data.NeedPeople+"\">\n" +
+                    "                                        <small>活动限制人数大于0。</small>\n" +
+                    "                                    </div>\n" +
+                    "                                </div>\n"+
+                    "                              <div class=\"am-form-group\">\n" +
+                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">活动是否展示 <span class=\"tpl-form-line-small-title\">ActiveContact</span></label>\n" +
+                    "                                    <div class=\"am-u-sm-9\">\n" +
+                    "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"active-is_show\" placeholder=\""+data.IsShow+"\">\n" +
+                    "                                        <small>活动是否展示,请输入true/false。</small>\n" +
+                    "                                    </div>\n" +
                     "                                </div>\n"
+
                 end = "                                <div class=\"am-form-group\">\n" +
                     "                                    <div class=\"am-u-sm-9 am-u-sm-push-3\" onClick='updateActive("+data.ID+")'>\n" +
                     "                                        <button type=\"button\" class=\"am-btn am-btn-primary tpl-btn-bg-color-success \">提交</button>\n" +
@@ -1360,6 +1400,8 @@
         formData.append('address',$("#active-address").val())
         formData.append('contact',$("#active-contact").val())
         formData.append('time',$("#active-time").val())
+        formData.append('needPeople',$("#active-people").val())
+        formData.append('is_show',$("#active-is_show").val())
         $.ajax({
             url:"/api/active",
             type:"POST",
@@ -1548,8 +1590,6 @@
         alert("该类型不支持新建!")
     }
 
-
-
     var filechange=function(event){
         var files = event.target.files, file;
         if (files && files.length > 0) {
@@ -1582,6 +1622,8 @@
         formData.append('address',$("#active-address").val())
         formData.append('contact',$("#active-contact").val())
         formData.append('time',$("#active-time").val())
+        formData.append('needPeople',$("#active-people").val())
+        formData.append('is_show',$("#active-is_show").val())
         $.ajax({
             url:"/api/change/active",
             type:"POST",

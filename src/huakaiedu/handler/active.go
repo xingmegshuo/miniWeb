@@ -101,13 +101,17 @@ func GetActive(c *gin.Context) {
 func CreateActive(c *gin.Context) {
 	db := DB
 	filename := Upload(c)
+	n, _ := strconv.Atoi(c.PostForm("needPeople"))
 	active := models.Active{
-		Name:    c.PostForm("name"),
-		Content: c.PostForm("content"),
-		Image:   filename,
-		Address: c.PostForm("address"),
-		Contact: c.PostForm("contact"),
-		Time:    c.PostForm("time"),
+		Name:       c.PostForm("name"),
+		Content:    c.PostForm("content"),
+		Image:      filename,
+		Address:    c.PostForm("address"),
+		Contact:    c.PostForm("contact"),
+		Time:       c.PostForm("time"),
+		Status:     "正常",
+		NeedPeople: n,
+		IsShow:     c.PostForm("is_show"),
 	}
 	res := models.Active{}
 	result := db.Where(&active).First(&res)
@@ -158,6 +162,7 @@ func CreateActive(c *gin.Context) {
 func UpdateActive(c *gin.Context) {
 	db := DB
 	id, _ := strconv.Atoi(c.DefaultPostForm("id", "0"))
+	n, _ := strconv.Atoi(c.PostForm("needPeople"))
 	res := models.Active{}
 	result := db.First(&res, id)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) && id != 0 {
@@ -170,23 +175,28 @@ func UpdateActive(c *gin.Context) {
 		newActive := models.Active{}
 		if filename != "" {
 			newActive = models.Active{
-				Name:    c.PostForm("name"),
-				Content: c.PostForm("content"),
-				Image:   filename,
-				Address: c.PostForm("address"),
-				Contact: c.PostForm("contact"),
-				Time:    c.PostForm("time"),
+				Name:       c.PostForm("name"),
+				Content:    c.PostForm("content"),
+				Image:      filename,
+				Address:    c.PostForm("address"),
+				Contact:    c.PostForm("contact"),
+				Time:       c.PostForm("time"),
+				Status:     c.PostForm("status"),
+				NeedPeople: n,
+				IsShow:     c.PostForm("is_show"),
 			}
 		} else {
 			newActive = models.Active{
-				Name:    c.PostForm("name"),
-				Content: c.PostForm("content"),
-				Address: c.PostForm("address"),
-				Contact: c.PostForm("contact"),
-				Time:    c.PostForm("time"),
+				Name:       c.PostForm("name"),
+				Content:    c.PostForm("content"),
+				Address:    c.PostForm("address"),
+				Contact:    c.PostForm("contact"),
+				Time:       c.PostForm("time"),
+				Status:     c.PostForm("status"),
+				NeedPeople: n,
+				IsShow:     c.PostForm("is_show"),
 			}
 		}
-
 		db.Model(&res).Updates(&newActive)
 		c.JSON(200, gin.H{
 			"status":  "success",
