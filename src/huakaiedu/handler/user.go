@@ -83,16 +83,16 @@ func Login(c *gin.Context) {
 		sex = "女"
 	}
 	user := models.User{
-		NickName: u.NickName,
-		OpenId:   u.Openid,
-		Gender:   sex,
-		Avatar:   u.Headimgurl,
-		City:     u.City,
+		OpenId: u.Openid,
+		Gender: sex,
 	}
 	res := models.User{}
 	result := db.Where(&user).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		user.Iden = "普通用户"
+		user.Avatar = u.Headimgurl
+		user.City = u.City
+		user.NickName = u.NickName
 		db.Create(&user)
 		c.JSON(200, gin.H{
 			"status":  "success",
@@ -100,6 +100,12 @@ func Login(c *gin.Context) {
 			"data":    user,
 		})
 	} else {
+		newUser := models.User{
+			Avatar:   u.Headimgurl,
+			NickName: u.NickName,
+			City:     u.City,
+		}
+		db.Model(&res).Updates(&newUser)
 		c.JSON(200, gin.H{
 			"status":  "success",
 			"message": "登录成功",
