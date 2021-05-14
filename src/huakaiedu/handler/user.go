@@ -88,11 +88,11 @@ func Login(c *gin.Context) {
 		Gender:   sex,
 		Avatar:   u.Headimgurl,
 		City:     u.City,
-		Iden:     "普通用户",
 	}
 	res := models.User{}
 	result := db.Where(&user).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		user.Iden = "普通用户"
 		db.Create(&user)
 		c.JSON(200, gin.H{
 			"status":  "success",
