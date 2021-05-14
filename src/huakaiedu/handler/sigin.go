@@ -100,12 +100,12 @@ func CreateSign(c *gin.Context) {
 	sign := models.Sign{
 		ActiveID: activeId,
 		UserID:   id,
-		Status:   "申请",
 	}
 
 	res := models.Sign{}
 	result := db.Where(&sign).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		sign.Status = "申请"
 		db.Create(&sign)
 		c.JSON(200, gin.H{
 			"status":  "success",
