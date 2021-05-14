@@ -63,19 +63,18 @@ func GetPowerMes(c *gin.Context) {
 
 func CreatePower(c *gin.Context) {
 	db := DB
-	filename := Upload(c)
 	id, _ := strconv.Atoi(c.DefaultPostForm("id", "0"))
-
 	active := models.Power{
 		Name:        c.PostForm("name"),
 		Type:        c.PostForm("type"),
-		ImgUrl:      filename,
+		Img:         c.PostForm("img"),
 		Description: c.PostForm("desc"),
+		Contact:     c.PostForm("contact"),
 		UserID:      id,
 	}
 	res := models.Power{}
 	result := db.Where(&active).First(&res)
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) && len(filename) > 0 && id != 0 {
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) && id != 0 {
 		db.Create(&active)
 		c.JSON(200, gin.H{
 			"status":  "success",
@@ -96,18 +95,22 @@ func CreatePowerMes(c *gin.Context) {
 	userId, _ := strconv.Atoi(c.Query("user"))
 	powerId, _ := strconv.Atoi(c.Query("power"))
 	uId, _ := strconv.Atoi(c.Query("u_id"))
+	lou, _ := strconv.Atoi(c.Query("lou"))
+
 	active := models.PowerComment{
-		Message: c.Query("message"),
-		UserID:  userId,
-		PowerID: powerId,
-		UID:     uId,
+		Message:   c.Query("message"),
+		UserID:    userId,
+		PowerID:   powerId,
+		UID:       uId,
+		Lou:       lou,
+		LouStatus: c.Query("status"),
 	}
 	power := models.Power{}
 	db.Where("id=?", powerId).Find(&power)
-	db.Model(&power).Update("CommentCount", power.CommentCount+1)
 	res := models.PowerComment{}
 	result := db.Where(&active).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		db.Model(&power).Update("CommentCount", power.CommentCount+1)
 		db.Create(&active)
 		c.JSON(200, gin.H{
 			"status":  "success",
@@ -136,21 +139,12 @@ func UpdatePower(c *gin.Context) {
 			"message": "没有此赋能信息",
 		})
 	} else {
-		filename := Upload(c)
-		newActive := models.Power{}
-		if filename != "" {
-			newActive = models.Power{
-				Name:        c.PostForm("name"),
-				ImgUrl:      filename,
-				Description: c.PostForm("desc"),
-				UserID:      uid,
-			}
-		} else {
-			newActive = models.Power{
-				Name:        c.PostForm("name"),
-				Description: c.PostForm("desc"),
-				UserID:      uid,
-			}
+		newActive := models.Power{
+			Name:        c.PostForm("name"),
+			Img:         c.PostForm("img"),
+			Description: c.PostForm("desc"),
+			Contact:     c.PostForm("contact"),
+			UserID:      uid,
 		}
 		db.Model(&res).Updates(&newActive)
 		c.JSON(200, gin.H{

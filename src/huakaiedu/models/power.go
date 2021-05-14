@@ -8,7 +8,9 @@
 
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 // 赋能列表
 
@@ -18,8 +20,9 @@ type Power struct {
 	User         User `gorm:"ForeignKey:UserID"`
 	UserID       int
 	Name         string
-	ImgUrl       string `bson:"imgUrl"`
+	Img          string
 	Description  string
+	Contact      string //联系方式和联系人
 	CommentCount int
 }
 
@@ -27,11 +30,13 @@ type Power struct {
 
 type PowerComment struct {
 	gorm.Model
-	Message  string
-	Power    Power `gorm:"ForeignKey:PowerID"`
-	PowerID  int
-	User     User `gorm:"ForeignKey:UserID"`
-	UserID   int
-	RecvUser User `gorm:"ForeignKey:UID"`
-	UID      int
+	Message   string
+	Power     Power `gorm:"ForeignKey:PowerID"`
+	PowerID   int
+	User      User `gorm:"ForeignKey:UserID"`
+	UserID    int
+	RecvUser  User `gorm:"ForeignKey:UID"`
+	UID       int
+	Lou       int
+	LouStatus string
 }
