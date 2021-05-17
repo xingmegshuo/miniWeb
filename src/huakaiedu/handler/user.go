@@ -89,7 +89,7 @@ func Login(c *gin.Context) {
 	res := models.User{}
 	result := db.Where(&user).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		user.Iden = "普通用户"
+		user.Iden = "游客"
 		user.Avatar = u.Headimgurl
 		user.City = u.City
 		user.NickName = u.NickName
@@ -101,7 +101,6 @@ func Login(c *gin.Context) {
 		})
 	} else {
 		newUser := models.User{
-			Avatar:   u.Headimgurl,
 			NickName: u.NickName,
 			City:     u.City,
 		}
@@ -304,17 +303,17 @@ func ChangeUser(c *gin.Context) {
 			"message": "没有此用户",
 		})
 	} else {
-		newUser := models.User{
-			Gender:   c.Query("gender"),
-			Avatar:   c.Query("avatar"),
-			City:     c.Query("city"),
-			NickName: c.Query("nickname"),
-			Phone:    c.Query("phone"),
-			Mail:     c.Query("mail"),
-			Iden:     c.Query("iden"),
-			OpenId:   c.Query("openid"),
+		newUser := models.User{}
+		if len(c.Query("iden")) > 0 {
+			newUser.Iden = c.Query("iden")
 		}
-		log.Println(newUser)
+		if len(c.Query("openid")) > 0 {
+			newUser.OpenId = c.Query("openid")
+		}
+
+		if len(c.Query("t")) > 0 {
+			newUser.T = c.Query("t")
+		}
 		db.Model(&res).Updates(&newUser)
 		c.JSON(200, gin.H{
 			"status":  "success",
@@ -333,4 +332,27 @@ func WxGet(url string) []byte {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	return body
+}
+
+// 修改头像
+
+func ChangeImg(c *gin.Context) {
+	db := DB
+	filename := Upload(c)
+	id, _ := strconv.Atoi(c.DefaultPostForm("id", "0"))
+	if id != 0 {
+		user := models.User{}
+		db.Where("id = ?", id).Find(&user)
+		user.Avatar = "http://app.menguoli.com/" + filename
+		db.Save(&user)
+		c.JSON(200, gin.H{
+			"status":  "success",
+			"message": "修改头像成功",
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"status":  "success",
+			"message": "修改头像失败",
+		})
+	}
 }

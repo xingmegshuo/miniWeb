@@ -442,9 +442,7 @@
                     "<td>"+data[i].Mail+"</td>"+
                     "<td>"+data[i].Iden+"</td>"+
                     "<td>"+data[i].OpenId+"</td>"
-
-                    if (data[i].Iden=="admin"){
-                        value = value +                    " <td class=\"am-text-middle\">\n" +
+                value = value +                    " <td class=\"am-text-middle\">\n" +
                             "     <div class=\"tpl-table-black-operation\">\n" +
                             "         <a href=\"javascript:;\" onclick='showTable("+data[i].ID+",\"user\")'>\n" +
                             "              <i class=\"am-icon-pencil\"></i> 编辑\n" +
@@ -455,18 +453,6 @@
                             "        </div>\n" +
                             "  </td>\n" +
                             " </tr>"
-                    }else{
-                        value = value +
-                        " <td class=\"am-text-middle\">\n" +
-                        "     <div class=\"tpl-table-black-operation\">\n" +
-                        "         <a href=\"javascript:;\" class=\"tpl-table-black-operation-del\" onclick='Delete("+data[i].ID+",\"user\")'>" +
-                        "            <i class=\"am-icon-trash\"></i> 删除\n" +
-                        "          </a>\n" +
-                        "        </div>\n" +
-                        "  </td>\n" +
-                        " </tr>"
-                    }
-
             }
         }
         if (name=="会员"){
@@ -1059,21 +1045,48 @@
             var data
             if (table=="user"){
                 data = getData("/api/web/getUsers",{'search.1.key':"ID","search.1.value":Id})
-                title = "修改管理员密码"
-                item = "                              <div class=\"am-form-group\">\n" +
-                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">账号 <span class=\"tpl-form-line-small-title\">Account</span></label>\n" +
-                    "                                    <div class=\"am-u-sm-9\">\n" +
-                    "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"user-name\" placeholder=\""+data.data[0].NickName+"\" disabled=\"disabled\">\n" +
-                    "                                        <small>请填写账号8-13长度比较好记。</small>\n" +
-                    "                                    </div>\n" +
-                    "                                </div>\n"+
-                    "                              <div class=\"am-form-group\">\n" +
-                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">密码 <span class=\"tpl-form-line-small-title\">Password</span></label>\n" +
-                    "                                    <div class=\"am-u-sm-9\">\n" +
-                    "                                        <input type=\"password\" class=\"tpl-form-input\" id=\"user-pwd\" placeholder=\"请输入密码\">\n" +
-                    "                                        <small>请填写密码8-13长度比较好记。</small>\n" +
-                    "                                    </div>\n" +
-                    "                                </div>\n"
+                if (data.data[0].Iden=="admin"){
+                    title = "修改管理员密码"
+                    item = "                              <div class=\"am-form-group\">\n" +
+                        "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">账号 <span class=\"tpl-form-line-small-title\">Account</span></label>\n" +
+                        "                                    <div class=\"am-u-sm-9\">\n" +
+                        "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"user-name\" placeholder=\""+data.data[0].NickName+"\" disabled=\"disabled\">\n" +
+                        "                                        <small>请填写账号8-13长度比较好记。</small>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n"+
+                        "                              <div class=\"am-form-group\">\n" +
+                        "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">密码 <span class=\"tpl-form-line-small-title\">Password</span></label>\n" +
+                        "                                    <div class=\"am-u-sm-9\">\n" +
+                        "                                        <input type=\"password\" class=\"tpl-form-input\" id=\"user-pwd\" placeholder=\"请输入密码\">\n" +
+                        "                                        <small>请填写密码8-13长度比较好记。</small>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n"
+                }else{
+                    title = "修改会员信息"
+                    item = "                              <div class=\"am-form-group\">\n" +
+                        "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">账号 <span class=\"tpl-form-line-small-title\">Account</span></label>\n" +
+                        "                                    <div class=\"am-u-sm-9\">\n" +
+                        "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"user-name\" placeholder=\""+data.data[0].NickName+"\" disabled=\"disabled\">\n" +
+                        "                                        <small>请填写账号8-13长度比较好记。</small>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n"+
+                        "                              <div class=\"am-form-group\">\n" +
+                        "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">身份 <span class=\"tpl-form-line-small-title\">Identity</span></label>\n" +
+                        "                                    <div class=\"am-u-sm-9\">\n" +
+                        "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"user-iden\" placeholder=\"请输入身份\">\n" +
+                        "                                        <small>身份。</small>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n"+
+                        "                              <div class=\"am-form-group\">\n" +
+                        "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">服务期限 <span class=\"tpl-form-line-small-title\">T</span></label>\n" +
+                        "                                    <div class=\"am-u-sm-9\">\n" +
+                        "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"user-time\" placeholder=\"请输入服务期限\">\n" +
+                        "                                        <small>服务期限。</small>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n"
+                }
+                // title = "修改管理员密码"
+
                 end = "                                <div class=\"am-form-group\">\n" +
                     "                                    <div class=\"am-u-sm-9 am-u-sm-push-3\" onClick='changeSuper("+data.data[0].ID + ")'>\n" +
                     "                                        <button type=\"button\" class=\"am-btn am-btn-primary tpl-btn-bg-color-success \">提交</button>\n" +
@@ -1481,7 +1494,7 @@
 
 
     function changeSuper(ID){
-        PutData('/api/web/changeUser?id='+ID+'&openid='+$("#user-pwd").val())
+        PutData('/api/web/changeUser?id='+ID+'&openid='+$("#user-pwd").val()+'&iden='+$("#user-iden").val()+"&t="+$("#user-t").val())
     }
     function updatePower(ID){
         var formData = new FormData();

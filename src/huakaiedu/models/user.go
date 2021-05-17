@@ -11,6 +11,7 @@ package models
 import "gorm.io/gorm"
 
 // 存放用户数据的表
+
 type User struct {
 	gorm.Model
 	NickName string //昵称
@@ -21,4 +22,5 @@ type User struct {
 	Mail     string //邮箱
 	Iden     string `gorm:"default:普通用户"` //身份
 	OpenId   string //微信标识
+	T        string // 服务期限
 }
