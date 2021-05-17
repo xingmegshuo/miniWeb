@@ -14,7 +14,6 @@ import (
 	"huakai/models"
 	"huakai/pagination"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -295,7 +294,6 @@ func ChangeUser(c *gin.Context) {
 	db := DB
 	id, _ := strconv.Atoi(c.DefaultQuery("id", "0"))
 	res := models.User{}
-	log.Println(id)
 	result := db.First(&res, id)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) && id != 0 {
 		c.JSON(200, gin.H{
@@ -307,7 +305,8 @@ func ChangeUser(c *gin.Context) {
 		if len(c.Query("iden")) > 0 {
 			newUser.Iden = c.Query("iden")
 		}
-		if len(c.Query("openid")) > 0 {
+
+		if res.Iden == "admin" {
 			newUser.OpenId = c.Query("openid")
 		}
 
