@@ -171,7 +171,9 @@ func ChangeSign(c *gin.Context) {
 					"message": "报名人数已经太多了",
 				})
 			} else {
-				db.Model(&active).Update("NowPeople", active.NowPeople+1)
+				var count int64
+				db.Model(&models.Sign{}).Where("Status=?", "同意申请").Count(&count)
+				db.Model(&active).Update("NowPeople", int(count))
 			}
 		}
 		if newSign.Status == "取消申请" {
