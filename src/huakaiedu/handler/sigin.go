@@ -172,7 +172,7 @@ func ChangeSign(c *gin.Context) {
 				})
 			} else {
 				var count int64
-				db.Model(&models.Sign{}).Where("Status=?", "同意申请").Count(&count)
+				db.Model(&models.Sign{}).Where("status=?", "同意申请").Count(&count)
 				db.Model(&active).Update("NowPeople", int(count))
 			}
 		}
