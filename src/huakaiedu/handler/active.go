@@ -216,9 +216,9 @@ func Upload(c *gin.Context) string {
 	}
 	//文件的名称
 	filename := time.Now().Format("20060102150405") + ".png"
-	out, err := os.Create("static/img/" + filename)
+	out, err1 := os.Create("static/img/" + filename)
 	//注意此处的 static/uploadfile/ 不是/static/uploadfile/
-	if err != nil {
+	if err1 != nil {
 		log.Fatal(err)
 	}
 	defer out.Close()
