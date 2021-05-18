@@ -110,7 +110,9 @@ func CreatePowerMes(c *gin.Context) {
 	res := models.PowerComment{}
 	result := db.Where(&active).First(&res)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		db.Model(&power).Update("CommentCount", power.CommentCount+1)
+		var count int64
+		db.Model(&models.PowerComment{}).Where("power_id = ?", powerId).Count(&count)
+		db.Model(&power).Update("CommentCount", count)
 		db.Create(&active)
 		c.JSON(200, gin.H{
 			"status":  "success",
