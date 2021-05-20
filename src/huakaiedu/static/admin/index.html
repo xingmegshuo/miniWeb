@@ -1244,6 +1244,7 @@
             if (table == 'member') {
                 member = getData("/api/memberUser").data
                 data = getData("/api/member", {'search.1.key': "ID", "search.1.value": Id}).data[0]
+                console.log(data)
                 title = "修改会员展示"
                 item = "                              <div class=\"am-form-group\">\n" +
                     "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">标题 <span class=\"tpl-form-line-small-title\">ActiveName</span></label>\n" +
@@ -1294,9 +1295,8 @@
                     "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">会员 <span class=\"tpl-form-line-small-title\">会员</span></label>\n" +
                     "                                    <div class=\"am-u-sm-9\">\n" +
                     "                               <select data-am-selected=\"{btnSize: 'sm'}\" id=\"options\">\n"
-                for (var i = 0; i < member.length; i++) {
-                    item = item + "<option value=\"" + member[i].ID + "\">" + member[i].User.NickName + "</option>"
-                }
+                item = item + "<option value=\"" +data.UserID + "\">" + data.User.NickName + "</option>"
+
                 item = item +
                     "                                    </select>" +
                     "                                        <small>会员</small>\n" +
