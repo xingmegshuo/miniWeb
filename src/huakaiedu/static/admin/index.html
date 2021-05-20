@@ -621,7 +621,7 @@
                 "<th>图片</th>" +
                 "<th>会员</th>" +
                 "<th>类型</th>" +
-                "<th>审核状态</th>"+
+                "<th>审核状态</th>" +
                 "<th>操作</th>"
             value = ""
             alldata = getData("/api/member?page=" + page)
@@ -638,7 +638,7 @@
                     "</td>\n" +
                     "<td>" + data[i].Member.User.NickName + "</td>" +
                     "<td>" + data[i].Type + "</td>" +
-                    "<td>" + data[i].Status+ "</td>" +
+                    "<td>" + data[i].Status + "</td>" +
                     " <td class=\"am-text-middle\">\n" +
                     "     <div class=\"tpl-table-black-operation\">\n" +
                     "         <a href=\"javascript:;\" onclick='showTable(" + data[i].ID + ",\"member\")'>\n" +
@@ -1290,18 +1290,18 @@
                     "                                        <input type=\"text\" class=\"tpl-form-input\" id=\"member-status\" placeholder='" + data.Status + "'>\n" +
                     "                                        <small>审核状态,填写审核通过或未通过。</small>\n" +
                     "                                    </div>\n" +
-                    "                                </div>\n" +
-                    "                              <div class=\"am-form-group\">\n" +
-                    "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">会员 <span class=\"tpl-form-line-small-title\">会员</span></label>\n" +
-                    "                                    <div class=\"am-u-sm-9\">\n" +
-                    "                               <select data-am-selected=\"{btnSize: 'sm'}\" id=\"options\">\n"
-                item = item + "<option value=\"" +data.UserID + "\">" + data.User.NickName + "</option>"
-
-                item = item +
-                    "                                    </select>" +
-                    "                                        <small>会员</small>\n" +
-                    "                                    </div>\n" +
                     "                                </div>\n"
+                //     "                              <div class=\"am-form-group\">\n" +
+                //     "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">会员 <span class=\"tpl-form-line-small-title\">会员</span></label>\n" +
+                //     "                                    <div class=\"am-u-sm-9\">\n" +
+                //     "                               <select data-am-selected=\"{btnSize: 'sm'}\" id=\"options\">\n"
+                // item = item + "<option value=\"" +data.MemberID + "\">" + data.User.NickName + "</option>"
+                //
+                // item = item +
+                //     "                                    </select>" +
+                //     "                                        <small>会员</small>\n" +
+                //     "                                    </div>\n" +
+                //     "                                </div>\n"
                 end = "                                <div class=\"am-form-group\">\n" +
                     "                                    <div class=\"am-u-sm-9 am-u-sm-push-3\" onClick='changeMemberRes(" + data.ID + ")'>\n" +
                     "                                        <button type=\"button\" class=\"am-btn am-btn-primary tpl-btn-bg-color-success \">提交</button>\n" +
@@ -1609,7 +1609,7 @@
         formData.append('content', $("#member-content").val())
         formData.append('memberId', $("#options").val())
         formData.append('type', $("#types").val())
-        formData.append('status',$("#member-status").val())
+        formData.append('status', $("#member-status").val())
         $.ajax({
             url: "/api/change/member",
             type: "POST",
