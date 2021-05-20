@@ -197,6 +197,8 @@ func main() {
 	api.GET("/powerMes", paginationHandler, handler.GetPowerMes)
 	api.POST("/powerMes", handler.CreatePowerMes)
 	api.POST("/change_head", handler.ChangeImg)
+	api.GET("/mes", paginationHandler, handler.GetMes)
+	api.POST("/mes", handler.ChangeMes)
 	v1 := api.Group("/wx")
 	{
 		v1.POST("/user/login", handler.Login)
