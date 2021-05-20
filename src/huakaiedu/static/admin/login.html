@@ -79,11 +79,12 @@
     <script>
         $(document).ready(function(){
             console.log($.cookie('name'),$.cookie('iden'))
-            // if ($.cookie('iden') == 'admin'){
-            //      window.location.href= "index.html";
-            // }else{
-            //     window.location.href = "userindex.html"
-            // }
+            if ($.cookie('iden') == 'admin'){
+                 window.location.href= "index.html";
+            }
+            if ($.cookie('iden') == '会员'){
+                window.location.href = "userindex.html"
+            }
             $("#login").click(function(){
                 var account,password,data
                 account = $("#account").val();
@@ -100,11 +101,12 @@
                             $.cookie('name',res.data.NickName,{expires:7})
                             $.cookie('iden',res.data.Iden,{expires:7})
                             $.cookie('id',res.ID,{expires:7})
-                            // if (res.data.Iden == 'admin'){
-                            //     window.location.href= "index.html";
-                            // }else{
-                            //     window.location.href = "userindex.html"
-                            // }
+                            if (res.data.Iden == 'admin'){
+                                window.location.href= "index.html";
+                            }
+                            if (res.data.Iden == '会员'){
+                                window.location.href = "userindex.html"
+                            }
                         }else{
                             alert(res.message)
                         }
