@@ -79,12 +79,12 @@
     <script>
         $(document).ready(function(){
             console.log($.cookie('name'),$.cookie('iden'))
-            if ($.cookie('iden') == 'admin'){
-                 window.location.href= "index.html";
-            }
-            if ($.cookie('iden') == "会员"){
-                window.location.href = "userindex.html"
-            }
+            // if ($.cookie('iden') == 'admin'){
+            //      window.location.href= "index.html";
+            // }
+            // if ($.cookie('iden') == "会员"){
+            //     window.location.href = "userindex.html"
+            // }
             $("#login").click(function(){
                 var account,password,data
                 account = $("#account").val();
