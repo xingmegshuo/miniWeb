@@ -27,7 +27,7 @@ func init() {
 		log.Fatal("db connect error")
 	}
 	// defer db.Close() //延时调用函数
-	Db.AutoMigrate(&User{}, &Active{}, &Sign{}, &JoinUs{}, &Member{}, &MemberRes{}, &ImgList{}, &Power{}, &PowerComment{}, &SystemMes{})
+	Db.AutoMigrate(&SystemMes{}, &User{}, &Active{}, &Sign{}, &JoinUs{}, &Member{}, &MemberRes{}, &ImgList{}, &Power{}, &PowerComment{})
 	sqlDB, err := Db.DB()
 	// 配置连接池
 	if err == nil {
