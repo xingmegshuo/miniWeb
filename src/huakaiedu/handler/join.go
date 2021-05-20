@@ -173,6 +173,7 @@ func ChangeJoinTable(c *gin.Context) {
 			systemMes := models.SystemMes{
 				UserID:  res.UserID,
 				Message: "您的会员申请审核已经通过",
+				Status:  "未读",
 			}
 			db.Create(&systemMes)
 			db.Create(&member)

@@ -237,8 +237,9 @@ func ChangeMemberRes(c *gin.Context) {
 		if status != "null" {
 			newMember.Status = status
 			systemMes := models.SystemMes{
-				UserID:  newMember.MemberID,
+				UserID:  res.MemberID,
 				Message: "您创建的" + newMember.Type + "信息审核" + status,
+				Status:  "未读",
 			}
 			db.Create(&systemMes)
 		}

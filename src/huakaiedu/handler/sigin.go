@@ -177,6 +177,7 @@ func ChangeSign(c *gin.Context) {
 				systemMes := models.SystemMes{
 					UserID:  res.UserID,
 					Message: "您申请的活动:<<" + active.Name + ">>活动审核已经通过",
+					Status:  "未读",
 				}
 				db.Create(&systemMes)
 			}
