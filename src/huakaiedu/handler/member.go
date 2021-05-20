@@ -213,27 +213,31 @@ func ChangeMemberRes(c *gin.Context) {
 	} else {
 		filename := Upload(c)
 		newMember := models.MemberRes{}
+
 		if filename != "" {
 			newMember = models.MemberRes{
-				Title:    c.PostForm("title"),
-				Content:  c.PostForm("content"),
-				ImgUrl:   filename,
-				MemberID: memberID,
-				Type:     c.PostForm("type"),
+				Title:   c.PostForm("title"),
+				Content: c.PostForm("content"),
+				ImgUrl:  filename,
+
+				Type: c.PostForm("type"),
 			}
 		} else {
 			newMember = models.MemberRes{
-				MemberID: memberID,
-				Title:    c.PostForm("title"),
-				Content:  c.PostForm("content"),
-				Type:     c.PostForm("type"),
+
+				Title:   c.PostForm("title"),
+				Content: c.PostForm("content"),
+				Type:    c.PostForm("type"),
 			}
+		}
+		if memberID != 0 {
+			newMember.MemberID = memberID
 		}
 		status := c.DefaultPostForm("status", "null")
 		if status != "null" {
 			newMember.Status = status
 			systemMes := models.SystemMes{
-				UserID:  memberID,
+				UserID:  newMember.MemberID,
 				Message: "您创建的" + newMember.Type + "信息审核" + status,
 			}
 			db.Create(&systemMes)
