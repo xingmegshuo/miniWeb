@@ -74,8 +74,17 @@
     <script src="assets/js/amazeui.min.js"></script>
     <script src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <script>
         $(document).ready(function(){
+            console.log($.cookie('name'),$.cookie('iden'))
+            if ($.cookie('iden') == 'admin'){
+                 window.location.href= "index.html";
+            }
+            if ($.cookie('iden') == "会员"){
+                window.location.href = "userindex.html"
+            }
             $("#login").click(function(){
                 var account,password,data
                 account = $("#account").val();
@@ -88,6 +97,10 @@
                 if (account.length > 0 && password.length>0){
                     $.post("/api/web/user/login",data,function(res) {
                         if (res.status == "success") {
+                            console.log(res.data)
+                            $.cookie('name',res.data.NickName,{expires:7})
+                            $.cookie('iden',res.data.Iden,{expires:7})
+                            $.cookie('id',res.ID,{expires:7})
                             window.location.href= "index.html";
                         }else{
                             alert(res.message)

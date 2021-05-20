@@ -16,5 +16,5 @@ type Sign struct {
 	ActiveID int
 	User     User `gorm:"ForeignKey:UserID"`
 	UserID   int
-	Status   string
+	Status   string // 活动报名审核
 }

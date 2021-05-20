@@ -67,6 +67,8 @@ func DeleteData(c *gin.Context) {
 		db.Delete(&models.JoinUs{}, id)
 	case "img":
 		db.Delete(&models.ImgList{}, id)
+	case "mes":
+		db.Delete(&models.SystemMes{}, id)
 	default:
 		c.JSON(200, gin.H{
 			"status":  "error",

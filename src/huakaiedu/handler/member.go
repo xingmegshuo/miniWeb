@@ -154,6 +154,7 @@ func CreateMemberRes(c *gin.Context) {
 			ImgUrl:   filename,
 			MemberID: id,
 			Type:     c.PostForm("type"),
+			Status:   "未审核",
 		}
 		db.Create(&member)
 		c.JSON(200, gin.H{
@@ -228,7 +229,15 @@ func ChangeMemberRes(c *gin.Context) {
 				Type:     c.PostForm("type"),
 			}
 		}
-
+		status := c.DefaultPostForm("status", "null")
+		if status != "null" {
+			newMember.Status = status
+			systemMes := models.SystemMes{
+				UserID:  memberID,
+				Message: "您创建的" + newMember.Type + "信息审核" + status,
+			}
+			db.Create(&systemMes)
+		}
 		db.Model(&res).Updates(&newMember)
 		c.JSON(200, gin.H{
 			"status":  "success",

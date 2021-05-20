@@ -142,7 +142,6 @@ func LoginWeb(c *gin.Context) {
 	user := models.User{
 		NickName: c.PostForm("account"),
 		OpenId:   c.PostForm("password"),
-		Iden:     "admin",
 	}
 	res := models.User{}
 	result := db.Where(&user).First(&res)

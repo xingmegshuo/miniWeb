@@ -20,6 +20,7 @@ type MemberRes struct {
 	Member   Member `gorm:"ForeignKey:MemberID"`
 	MemberID int
 	Type     string
+	Status   string
 }
 
 // 会员成员

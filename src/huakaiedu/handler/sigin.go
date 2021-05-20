@@ -174,6 +174,11 @@ func ChangeSign(c *gin.Context) {
 				var count int64
 				db.Model(&models.Sign{}).Where("status=?", "同意申请").Count(&count)
 				db.Model(&active).Update("NowPeople", int(count))
+				systemMes := models.SystemMes{
+					UserID:  res.UserID,
+					Message: "您申请的活动:<<" + active.Name + ">>活动审核已经通过",
+				}
+				db.Create(&systemMes)
 			}
 		}
 		if newSign.Status == "取消申请" {
