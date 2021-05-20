@@ -29,7 +29,7 @@ func GetMes(c *gin.Context) {
 	)
 	db.Model(&models.SystemMes{}).Scopes(pagination.PaginationScope(query)).Count(&count)
 	// SELECT * FROM `users`  WHERE ((`age` = "5") or (`email` like "%user-1%")) ORDER BY id desc LIMIT 3 OFFSET 0
-	db.Preload("Member.User").Scopes(pagination.PaginationScope(query)).Find(&memberRes)
+	db.Model(&models.SystemMes{}).Scopes(pagination.PaginationScope(query)).Find(&memberRes)
 	c.JSON(200, gin.H{
 		"status": "success",
 		"data":   memberRes,
