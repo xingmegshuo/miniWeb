@@ -945,9 +945,9 @@
                     "                                    <label for=\"user-name\" class=\"am-u-sm-3 am-form-label\">会员 <span class=\"tpl-form-line-small-title\">会员</span></label>\n" +
                     "                                    <div class=\"am-u-sm-9\">\n" +
                     "                               <select data-am-selected=\"{btnSize: 'sm'}\" id=\"options\">\n"
-                for (var i = 0; i < member.length; i++) {
-                    item = item + "<option value=\"" + member[i].ID + "\">" + member[i].User.NickName + "</option>"
-                }
+
+                item = item + "<option value=\"" + $.cookie('id') + "\">" + $.cookie('name') + "</option>"
+
                 item = item +
                     "                                    </select>" +
                     "                                        <small>会员</small>\n" +
