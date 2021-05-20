@@ -100,11 +100,11 @@
                             $.cookie('name',res.data.NickName,{expires:7})
                             $.cookie('iden',res.data.Iden,{expires:7})
                             $.cookie('id',res.ID,{expires:7})
-                            if ($.cookie('iden') == 'admin'){
-                                window.location.href= "index.html";
-                            }else{
-                                window.location.href = "userindex.html"
-                            }
+                            // if (res.data.Iden == 'admin'){
+                            //     window.location.href= "index.html";
+                            // }else{
+                            //     window.location.href = "userindex.html"
+                            // }
                         }else{
                             alert(res.message)
                         }
