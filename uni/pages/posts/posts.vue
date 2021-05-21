@@ -13,11 +13,11 @@
 				<view>{{user.T}}</view>
 			</view>
 			<view class="bl" v-if="title==='风采展示'">
-				<view>企业展示、产品展示、资源共享信息通过以下网址登录配置:</view>
+			<!-- 	<view>企业展示、产品展示、资源共享信息通过以下网址登录配置:</view>
 				<view>http://app.menguoli.com</view>
 				<view style="margin-top: 10rpx;">账号: {{user.NickName}}</view>
-				<view style="margin-top: 10rpx;">密码: {{user.OpenId}}</view>
-				<!-- <view  style="height: 500rpx;border: solid 1rpx #e8e8e8;" >
+				<view style="margin-top: 10rpx;">密码: {{user.OpenId}}</view> -->
+				<view  style="height: 500rpx;border: solid 1rpx #e8e8e8;" >
 					<textarea style=" padding: 10rpx;" @blur="bindTextAreaBlur" auto-height
 						:placeholder="desc"></textarea>
 				</view>
@@ -25,8 +25,17 @@
 					<textarea style=" padding: 10rpx;" @blur="bindTextAreaBlur1" auto-height
 						:placeholder="t"></textarea>
 				</view>
-				<view class="bl"> -->
-		<!-- 			<button  @tap="choose" style="margin-bottom: 50rpx;">选择封面</button>
+				<view style="margin-top: 30rpx;">
+					类别:
+								<select style="margin-left: 20rpx;padding: 5rpx;border: solid 1rpx;text-align: center;" @change="getSelect"  ref="addRequestState">
+									<option  value = "会员展示">会员展示</option>
+									<option  value = "会员成果展示">风采展示</option>
+									<option  value = "资源共享">资源共享</option>
+								</select>
+
+				</view>
+				<view class="bl"> 
+ 					<button  @tap="choose" style="margin-bottom: 50rpx;">选择封面</button>
 					<view v-if="img==='null' ">
 						<image v-for="(item,index) in imgArr" :src="item"></image>
 					</view>
@@ -34,7 +43,7 @@
 						<image :src="'http://app.menguoli.com/'+img"></image>
 					</view>
 					<button type="primary" style="margin-top: 50rpx;" v-if="imgArr!=='' && has==='false' " @tap="upload">提交</button>
-				</view> -->
+				</view>
 			</view>
 			<view class="bl" v-if="title==='消息'" >
 				<view @tap="show" :data-id="item.ID" v-for="item in message" style="border: solid 1rpx #f93;padding: 10rpx;border-radius: 10rpx;margin-top: 20rpx;">
@@ -56,7 +65,7 @@
 		data() {
 			return {
 				options: '',
-				title: '消息',
+				title: '风采展示',
 				marked: '',
 				imgArr:'',
 				user:'',
@@ -64,7 +73,8 @@
 				t:'请输入标题',
 				img:'null',
 				has:'false',
-				message:''
+				message:'',
+				type:'会员展示'
 			};
 		},
 
@@ -79,26 +89,7 @@
 				options: options,
 				user:app.globalData.user
 			});
-			// API.GetMessages(14).then(res=>{
-			// 	console.log(res)
-			// 	this.setData({
-			// 		title:'消息',
-			// 		message:res.data
-			// 	})
-			// })
-			// API.GetMemberId(14).then(res=>{
-			// 	console.log(res)
-			// 	this.setData({
-			// 		t:res.data[0].Title,
-			// 		des:res.data[0].Content,
-			// 		img:res.data[0].ImgUrl
-			// 	})
-			// 	if (res.data[0]){
-			// 		this.setData({
-			// 			has:"true"
-			// 		})
-			// 	}
-			// })
+
 			if (options.id == 1) {
 				this.setData({
 					title: '修改头像'
@@ -241,7 +232,7 @@
 								        'id': app.globalData.user.ID,
 										'title':this.$data.t,
 										'content':this.$data.desc,
-										'type':'会员展示'
+										'type': this.$data.type
 								    },
 								    success: (uploadFileRes) => {
 								        var st = eval("(" + uploadFileRes.data + ")").status
@@ -319,6 +310,11 @@
 							
 						}
 					}
+				})
+			},
+			getSelect:function(e){
+				this.setData({
+					type:this.$refs.addRequestState.value
 				})
 			}
 		}
