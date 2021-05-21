@@ -190,7 +190,7 @@
 								<textarea style=" padding: 10rpx;" @blur="bindTextAreaBlur" auto-height
 									placeholder="请输入300-500简介"></textarea>
 							</view>
-							<button form-type="submit" type="primary" style="margin-top: 20rpx;">提交</button>
+							<button form-type="submit" v-if="user.Iden ==='游客' " type="primary" style="margin-top: 20rpx;">提交</button>
 						</view>
 					</form>
 				</view>
@@ -219,6 +219,7 @@
 				titleId: '1',
 				url: '',
 				desc:'',
+				user:'',
 				current: 0,
 				current1: 0,
 				current2: 0,
@@ -362,7 +363,9 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-
+			this.setData({
+				user:getApp().globalData.user
+			})
 		},
 
 		/**
