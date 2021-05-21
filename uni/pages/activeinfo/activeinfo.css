@@ -1,0 +1,64 @@
+.main{
+	margin: 20rpx;
+	padding: 10rpx;
+	border: solid 1rpx #E8E8E8;
+	border-radius: 15rpx;
+	background-color: white;
+}
+
+.title{
+	width: 80%;
+	margin: 20rpx auto;
+	text-align: center;
+	font-size: 36rpx;
+	font-weight: bold;
+}
+.img{
+	width: 90%;
+	margin: auto;
+}
+.content{
+	width: 95%;
+	margin: auto;
+	word-break: break-all;
+	font-size: 24rpx;
+	font-weight: bolder; 
+}
+.contact{
+	margin: 10rpx auto;
+	font-size: 32rpx;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	color: #A5673F;
+}
+
+.d{
+	display: -webkit-box;
+	margin: 10rpx;
+	text-align: center;
+}
+.people{
+
+
+	color: #f93;
+}
+.npeople{
+
+	color: #f94;
+}
+.p{
+	width: 35%;
+	font-size: 34rpx;
+}
+.status{
+	width: 20%;
+	margin-left: 5%;
+	text-align: center;
+	font-size: 34rpx;
+	color: black;
+}
+.bu{
+	margin: 10rpx auto;
+	width: 60%;
+}

@@ -1,0 +1,149 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-首页",
+				"navigationStyle": "custom",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-赋能列表",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-评论列表",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/category/category",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-专委会",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "可持续发展专业委员会-个人中心",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/posts/posts",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-会员",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mostpost/index",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-赋能留言",
+				"navigationStyle": "custom"			
+			}
+		},
+		{
+			"path": "pages/active/active",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-活动",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/cs/cs",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-赋能分类",
+				"navigationStyle": "custom",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/showhy/showhy",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "可持续发展专业委员会-会员展示",
+				"navigationStyle": "custom"
+			}
+		}
+	    ,{
+            "path" : "pages/activeinfo/activeinfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "活动详情",
+                "enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/ziyuan/ziyuan",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "可持续发展专业委员会-资源对接",
+                "enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+            }
+            
+        }
+    ],
+	"tabBar": {
+		"color": "#AAAAAA",
+		"selectedColor": "#262626",
+		"borderStyle": "black",
+		"backgroundColor": "#fff",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "/static/images/home.png",
+				"selectedIconPath": "/static/images/home_on.png"
+			},
+			{
+				"text": "专委会",
+				"pagePath": "pages/category/category",
+				"iconPath": "/static/images/zwh_on.png",
+				"selectedIconPath": "/static/images/zwh.png"
+			},
+			{
+				"text": "资源对接",
+				"pagePath": "pages/ziyuan/ziyuan",
+				"iconPath": "/static/images/collect.png",
+				"selectedIconPath": "/static/images/collected.png"
+			},
+			{
+				"text": "会员展示",
+				"pagePath": "pages/showhy/showhy",
+				"iconPath": "/static/images/us.jpg",
+				"selectedIconPath": "/static/images/us_on.jpg"
+			},
+			{
+				"text": "个人中心",
+				"pagePath": "pages/mine/mine",
+				"iconPath": "/static/images/user.png",
+				"selectedIconPath": "/static/images/user_on.png"
+			}
+		]
+	},
+	"sitemapLocation": "sitemap.json",
+	"globalStyle": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#ffffff"
+	},
+	"subPackages": []
+}

@@ -1,0 +1,163 @@
+.info{
+	margin:  20rpx;
+	border-radius: 18rpx;
+	border: solid 1rpx white;
+	background-color: white;
+	padding: 20rpx;
+}
+.info-name{
+	text-align: center;
+	font-size: 38rpx;
+}
+
+.info-image {
+	width: 80%;
+	height: 320rpx;
+	margin: auto;
+}
+.info-image image{
+	width: 100%;
+	height: 100%;
+	border-radius: 10rpx;
+}
+
+.info-desc{
+	font-size: 28rpx;
+	margin: 20rpx;
+	width: 90%;
+	word-break: break-all;
+}
+
+.addcomment{
+	position: absolute;
+	width: 100%;
+	height: 100rpx;
+	background-color: white;
+	border: solid 1rpx white;
+	bottom: 0rpx;
+	z-index: 99999;
+}
+.nav{
+	height: 100%;
+	width: 100%;
+	padding-top: 10rpx;
+	
+	display: -webkit-box;
+}
+.input{
+	width: 75%;
+	margin-left: 2.5%;
+	border: solid 1rpx #fadbd9;
+	font-size: 28rpx;
+	height: 70rpx;
+	padding: 10rpx;
+	font-weight: bold;
+	border-radius: 5rpx;
+}
+.bt{
+	width: 100%;
+	height: 70rpx;
+	border: solid 1rpx #FADBD9;
+	margin-left: 10%;
+	line-height: 70rpx;
+}
+.comment{
+	margin: 20rpx;
+
+}
+.comments{
+	overflow: scroll;
+	max-height: 620rpx;
+}
+.tt{
+	background-color: white;
+	border: solid 1rpx #FADBD9;
+	height: 60rpx;
+	line-height: 60rpx;
+	padding-left: 20rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+}
+
+.tt image{
+	width: 40rpx;
+	height: 40rpx;
+	margin-right: 8rpx;
+}
+	
+.item {
+	margin-top: 10rpx;
+	padding: 20rpx;
+	border-radius: 10rpx;
+	border: solid 1rpx #FADBD9;
+}
+
+.f {
+	display: -webkit-box;
+	border-bottom: solid 1rpx #FADBD9;
+	height: 80rpx;
+}
+.h{
+	width: 60rpx;
+	height: 60rpx;
+	
+}
+.h image{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.n {
+	line-height: 80rpx;
+	margin-left: 2%;
+	font-size: 36rpx;
+	font-weight: bold;
+}
+.iden{
+	line-height: 80rpx;
+	margin-left: 2%;
+	font-size: 32rpx;
+	color: #f93;
+}
+.ti{
+	line-height: 80rpx;
+	margin-left: 2%;
+	font-size: 30rpx;
+}
+.txt{
+	padding: 10rpx 20rpx;
+	font-size: 28rpx;
+	background-color: white;
+	width: 90%;
+	margin-left: 10%;
+	margin-top: 5rpx;
+	border-radius: 10rpx;
+	display: -webkit-box;
+}
+
+.recb{
+	width: 80%;
+	word-break: break-all;
+}
+.recv{
+	width: 15%;
+	border: solid 1rpx #f93;
+	text-align: center;
+	padding: 5rpx;
+	height: 50rpx;
+}
+
+.index_article_cover{
+  width: 678rpx;
+  height: 380rpx;
+  border-radius: 20rpx;
+  /* border-top-right-radius: 50px; */
+}
+.index_article_covers{
+  width: 678rpx;
+  height: 380rpx;
+  border-radius: 10rpx;
+  /* border-top-left-radius: 20px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px; */
+}
