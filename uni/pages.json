@@ -106,7 +106,7 @@
 	"tabBar": {
 		"color": "#AAAAAA",
 		"selectedColor": "#262626",
-		"borderStyle": "black",
+		"borderStyle": "#ffcd7f",
 		"backgroundColor": "#fff",
 		"list": [{
 				"text": "首页",

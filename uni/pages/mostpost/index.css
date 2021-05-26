@@ -70,8 +70,9 @@
 	max-height: 620rpx;
 }
 .tt{
+	margin-top: 50rpx;
 	background-color: white;
-	border: solid 1rpx #FADBD9;
+	border: solid 1rpx white;
 	height: 60rpx;
 	line-height: 60rpx;
 	padding-left: 20rpx;
@@ -86,10 +87,11 @@
 }
 	
 .item {
-	margin-top: 10rpx;
+	margin-top: 20rpx;
 	padding: 20rpx;
 	border-radius: 10rpx;
-	border: solid 1rpx #FADBD9;
+	background-color: white;
+	border: solid 1rpx #c4c4c4;
 }
 
 .f {
@@ -145,6 +147,8 @@
 	text-align: center;
 	padding: 5rpx;
 	height: 50rpx;
+	color: white;
+	background-color: #ff9029;
 }
 
 .index_article_cover{

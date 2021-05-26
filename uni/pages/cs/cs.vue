@@ -5,14 +5,14 @@
 				<text class="user-item_text">企业策划</text>
 				<view class="user-item_icon">
 					<image class="user-item_icon_img"
-						src="https://cloud-minapp-16269.cloud.ifanrusercontent.com/my-inform.svg"></image>
+						src="../../static/images/企业策划.png"></image>
 				</view>
 			</view>
 			<view class="user-item relative" data-info="企业申报" @tap="bindHandler">
 				<text class="user-item_text">企业申报</text>
 				<view class="user-item_icon">
 					<image class="user-item_icon_img"
-						src="https://cloud-minapp-16269.cloud.ifanrusercontent.com/small-logo-gray-with-radius.svg">
+						src="../../static/images/企业申报.png">
 					</image>
 				</view>
 			</view>
@@ -20,27 +20,27 @@
 				<text class="user-item_text">企业财务</text>
 				<view class="user-item_icon">
 					<image class="user-item_icon_img"
-						src="https://cloud-minapp-16269.cloud.ifanrusercontent.com/my-dynamic.svg"></image>
+						src="../../static/images/企业财务.png"></image>
 				</view>
 				
 			</view>
 			<view class="user-item relative" data-info="企业软件" @tap="bindHandler">
 				<text class="user-item_text">企业软件</text>
 				<view class="user-item_icon">
-					<image class="user-item_icon_img" src="/static/images/subscribe.png"></image>
+					<image class="user-item_icon_img" src="../../static/images/企业软件.png"></image>
 				</view>
 				
 			</view>
 			<view class="user-item relative" data-info="企业外宣" @tap="bindHandler">
 				<text class="user-item_text">企业外宣</text>
 				<view class="user-item_icon">
-					<image class="user-item_icon_img" src="/static/images/subscribe.png"></image>
+					<image class="user-item_icon_img" src="../../static/images/企业外宣.png"></image>
 				</view>
 			</view>
 			<view class="user-item relative" data-info="企业营销" @tap="bindHandler">
 				<text class="user-item_text">企业营销</text>
 				<view class="user-item_icon">
-					<image class="user-item_icon_img" src="/static/images/subscribe.png"></image>
+					<image class="user-item_icon_img" src="/static/images/企业营销.png"></image>
 				</view>
 				
 			</view>

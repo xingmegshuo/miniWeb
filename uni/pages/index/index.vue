@@ -1,6 +1,7 @@
 <template>
 	<!-- <view v-if="wx ===true"> -->
-	<view style="height: 100%;">
+	<view >
+		<view style="position: absolute;width: 100%;"><image src="../../static/images/bg.png" style="width: 100%;height: 280rpx;"></image></view>
 		<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000"
 			duration="500">
 			<swiper-item v-for="(item, i) in siteInfo" :key="i" :id="item.ID" >
@@ -165,7 +166,7 @@
 					title: '请在微信打开',
 					content: '请在微信打开本网页',
 					success:function(){
-						// window.location.href = "https://www.menguoli.com/static/404.html"
+						window.location.href = "https://www.menguoli.com/static/404.html"
 					}
 				})
 			}

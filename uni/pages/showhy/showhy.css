@@ -1,7 +1,7 @@
 /* pages/category/category.wxss */
 page{
 	min-height: 100%;
-	background-color: #6b1606;
+	background-color: #ffcd7f;
 }
 .is-flex {
 	display: flex;
@@ -122,7 +122,7 @@ page{
 }
 
 .no_active {
-	color: blue;
+	color: #b0702b;
 }
 
 .content_view {
@@ -183,7 +183,7 @@ page{
 
 .active-item{
 	margin-top: 30rpx;
-	background-color: #d4aea6;
+	background-color: white;
 	border-radius: 18rpx;
 	border: solid 1rpx white;
 }

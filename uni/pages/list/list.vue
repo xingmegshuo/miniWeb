@@ -67,6 +67,7 @@
 		 */
 		onLoad: function(options) {
 			// options.power, options.lou
+			console.log(options)
 			API.getCommentLou(options.power, options.lou).then(res => {
 				console.log(res.data)
 				this.setData({

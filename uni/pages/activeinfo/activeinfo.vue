@@ -30,7 +30,7 @@
 		},
 		onLoad: function(options) {
 			console.log(options.id)
-			API.getOneActive(1).then(res => {
+			API.getOneActive(options.id).then(res => {
 				console.log(res[0])
 				this.setData({
 					active: res[0],

@@ -13,7 +13,7 @@
     <view class="user-item relative">
       <text class="user-item_text">头像修改</text>
       <view class="user-item_icon">
-        <image class="user-item_icon_img" src="https://cloud-minapp-16269.cloud.ifanrusercontent.com/my-inform.svg"></image>
+        <image class="user-item_icon_img" src="../../static/images/avatar_change.png"></image>
       </view>
       
       <button  class="userLogin"  @tap="bindHandler" data-url="/pages/posts/posts?id=1"></button>
@@ -56,7 +56,7 @@
 		</view>
 
 	  <view class="user-item_icon" >
-	    <image class="user-item_icon_img" src="../../static/comment.png"></image>
+	    <image class="user-item_icon_img" src="../../static/images/my_mes.png"></image>
 	  </view>
 	
 	  <button class="userLogin"  @tap="bindHandler" data-url="/pages/posts/posts?id=4"></button>

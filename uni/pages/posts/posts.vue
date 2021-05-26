@@ -35,14 +35,14 @@
 
 				</view>
 				<view class="bl"> 
- 					<button  @tap="choose" style="margin-bottom: 50rpx;">选择封面</button>
+ 					<button  @tap="choose" style="margin-bottom: 50rpx;background-color: #ff9029;color: white;">选择封面</button>
 					<view v-if="img==='null' ">
 						<image v-for="(item,index) in imgArr" :src="item"></image>
 					</view>
 					<view v-else>
 						<image :src="'http://app.menguoli.com/'+img"></image>
 					</view>
-					<button type="primary" style="margin-top: 50rpx;" v-if="imgArr!=='' && has==='false' " @tap="upload">提交</button>
+					<button type="primary" style="margin-top: 50rpx;background-color: #ff9029;" v-if="imgArr!=='' && has==='false' " @tap="upload">提交</button>
 				</view>
 			</view>
 			<view class="bl" v-if="title==='消息'" >
